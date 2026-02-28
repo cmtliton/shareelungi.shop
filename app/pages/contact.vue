@@ -239,7 +239,7 @@ useSeoMeta({
   ogTitle: "যোগাযোগ করুন | shareelungi.shop",
   ogDescription:
     "পণ্য, ডেলিভারি বা পাইকারি অর্ডারের জন্য আমাদের সাথে যোগাযোগ করুন।",
-  ogImage: "https://shareelungi.shop/images/contact-og.jpg",
+  ogImage: "https://shareelungi.shop/images/Og.jpg",
 });
 </script>
 

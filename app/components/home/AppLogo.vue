@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-// Modern Nuxt 4 / Vue 3.3+ TS Interface for props
-interface Props {
-  height?: string | number;
-  width?: string | number;
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  height: 50,
-  width: "auto",
+const props = defineProps({
+  height: {
+    type: [String, Number],
+    default: 50,
+  },
+  width: {
+    type: [String, Number],
+    default: "auto",
+  },
 });
 
 // Computed property for dynamic inline styles

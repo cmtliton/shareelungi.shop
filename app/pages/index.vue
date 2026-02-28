@@ -33,7 +33,8 @@ const pending = ref(false);
 
 // SEO Meta
 useSeoMeta({
-  title: "shareelungi.shop | অরিজিনাল সোয়াজ লুঙ্গি ও এনায়েতপুরের শাড়ি",
+  title:
+    "shareelungi.shop | এনায়েতপুরের খামারগ্রাম, তামাই, শাহজাদপুর এর লুঙ্গি ও শাড়ি",
   description:
     "সিরাজগঞ্জের এনায়েতপুরের ঐতিহ্যবাহী তাঁতের শাড়ি এবং ফ্যাক্টরির অরিজিনাল লুঙ্গি অনলাইনে কিনুন। সারা বাংলাদেশে দ্রুত ক্যাশ অন ডেলিভারি সুবিধা।",
 
@@ -49,9 +50,10 @@ useSeoMeta({
 
   // Twitter Card
   twitterCard: "summary_large_image",
-  twitterTitle: "shareelungi.shop | অরিজিনাল সোয়াজ লুঙ্গি ও এনায়েতপুরের শাড়ি",
+  twitterTitle:
+    "shareelungi.shop | এনায়েতপুরের খামারগ্রাম, তামাই, শাহজাদপুর এর লুঙ্গি ও শাড়ি",
   twitterDescription:
-    "সিরাজগঞ্জের এনায়েতপুরের ঐতিহ্যবাহী তাঁতের শাড়ি এবং অরিজিনাল সোয়াজ লুঙ্গি অনলাইনে কিনুন।",
+    "সিরাজগঞ্জের এনায়েতপুরের ঐতিহ্যবাহী তাঁতের শাড়ি এবং অরিজিনাল লুঙ্গি অনলাইনে কিনুন।",
   twitterImage: "https://shareelungi.shop/Og.jpg",
 
   // Theme Color (মোবাইল ব্রাউজারের উপরের বারের রঙ আপনার ব্র্যান্ড কালার Crimson Red হবে)

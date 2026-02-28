@@ -64,7 +64,6 @@
 
 <script setup>
 import { sanitizeHtml } from "~/utils/sanitizeHtml";
-
 const route = useRoute();
 const categoriesStore = useCategoriesStore();
 const productsStore = useProductsStore();
@@ -103,7 +102,7 @@ const breadcrumbs = computed(() => [
 // ৫. SEO Meta Tags
 useSeoMeta({
   title: () =>
-    category.value ? `${category.value.name} | EMC Furniture` : "Loading...",
+    category.value ? `${category.value.name} | Sharee Lungi` : "Loading...",
   description: () =>
     category.value?.description?.replace(/<[^>]*>?/gm, "") || "",
   ogTitle: () => category.value?.name || "",

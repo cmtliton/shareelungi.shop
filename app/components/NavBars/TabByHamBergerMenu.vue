@@ -9,10 +9,10 @@
         @click="drawer = !drawer"
       />
 
-      <!-- লোগো -->
-      <NuxtLink to="/" class="d-flex align-center">
+      <!-- লোগো (logo component already contains its own NuxtLink) -->
+      <div class="d-flex align-center">
         <HomeAppLogo :height="40" />
-      </NuxtLink>
+      </div>
       <!-- ডেসটপ মেগা মেনু -->
       <div class="d-none d-md-flex h-100 ml-8" color="#FFB300">
         <v-menu
@@ -218,8 +218,8 @@ const megaCategories = computed(() =>
 }
 
 .header-icons .v-btn--icon {
-  width: 35px;
-  height: 35px;
+  width: 32px;
+  height: 32px;
 }
 
 .header-icons .v-icon {

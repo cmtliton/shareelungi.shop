@@ -166,7 +166,7 @@ const cartStore = useCartStore();
 // ১. রিয়্যাক্টিভ স্টেট (Query থেকে Number-এ কনভার্ট করা হয়েছে)
 const page = ref(route.query.page ? Number(route.query.page) : 1);
 const selectedCategory = ref(
-  route.query.category ? Number(route.query.category) : null
+  route.query.category ? Number(route.query.category) : null,
 );
 const sortBy = ref(route.query.sort || "date");
 const mobileDrawer = ref(false);
@@ -209,7 +209,7 @@ watch(
   () => {
     applyFilters();
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 // ৫. ক্যাটাগরি ফিল্টার ক্লিক হ্যান্ডলার
@@ -241,9 +241,28 @@ const decodeHtml = (html) => {
 };
 
 useSeoMeta({
-  title: "Shop Premium Furniture | Modern Home & Office Collection",
+  // Title: 60 ক্যারেক্টারের মধ্যে মূল কিওয়ার্ড এবং ব্র্যান্ডের নাম
+  title: "শপ পেজ | এনায়েতপুরের তাঁতের শাড়ি ও প্রিমিয়াম লুঙ্গির কালেকশন",
+
+  // Description: 150-160 ক্যারেক্টারের মধ্যে আকর্ষণীয় অফার এবং লোকেশন
   description:
-    "Explore our vast collection of sofas, beds, tables, and chairs for your home and office.",
+    "shareelungi.shop-এ সিরাজগঞ্জের এনায়েতপুরের ঐতিহ্যবাহী তাঁতের শাড়ি এবং আরামদায়ক প্রিমিয়াম সুতি লুঙ্গির বিশাল কালেকশন দেখুন। সারা বাংলাদেশে ক্যাশ অন ডেলিভারিতে অরিজিনাল দেশি পোশাক কিনুন।",
+
+  // Open Graph (Facebook, WhatsApp-এর জন্য)
+  ogTitle: "অরিজিনাল শাড়ি ও লুঙ্গির সেরা কালেকশন কিনুন | shareelungi.shop",
+  ogDescription:
+    "নতুন ডিজাইনের এনায়েতপুরের তাঁতের শাড়ি এবং ১০০% খাঁটি সুতি লুঙ্গির কালেকশন এখন shareelungi.shop-এ। ঘরে বসেই আপনার পছন্দের পোশাকটি অর্ডার করুন।",
+  ogType: "website",
+  ogImage: "https://shareelungi.shop/images/Og.jpg", // শপ পেজের জন্য সুন্দর একটি ব্যানার লিংক
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+
+  // Twitter Card (X এবং অন্যান্য সোশ্যাল মিডিয়ার জন্য)
+  twitterCard: "summary_large_image",
+  twitterTitle: "শপ পেজ | এনায়েতপুরের তাঁতের শাড়ি ও প্রিমিয়াম লুঙ্গি",
+  twitterDescription:
+    "shareelungi.shop-এ সিরাজগঞ্জের এনায়েতপুরের ঐতিহ্যবাহী তাঁতের শাড়ি এবং আরামদায়ক প্রিমিয়াম সুতি লুঙ্গির বিশাল কালেকশন দেখুন।",
+  twitterImage: "https://shareelungi.shop/images/Og.jpg",
 });
 </script>
 
