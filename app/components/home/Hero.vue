@@ -1,12 +1,9 @@
 <template>
-  <v-container
-    max-width="1360"
-    class="pa-0 mb-10 overflow-hidden rounded-lg hero-container"
-  >
+  <v-container class="pa-0 mb-2 overflow-hidden rounded-lg hero-container">
     <!-- carousel height এবং NuxtImg height এক হতে হবে -->
     <v-carousel
       :height="mobile ? 230 : 460"
-      :transition-duration="1000"
+      :transition-duration="1500"
       hide-delimiter-background
       show-arrows="hover"
       cycle

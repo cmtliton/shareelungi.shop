@@ -31,14 +31,14 @@ export default defineNuxtConfig({
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
           j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-MMGSWZ7Q');`,
+          })(window,document,'script','dataLayer','	GTM-M5Q8RH84');`,
           type: "text/javascript",
         },
       ],
       noscript: [
         {
           // noscript এর ক্ষেত্রেও innerHTML ব্যবহার করা ভালো
-          innerHTML: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MMGSWZ7Q"
+          innerHTML: `<iframe src="https://www.googletagmanager.com/ns.html?id=	GTM-M5Q8RH84"
           height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
           tagPosition: "bodyOpen",
         },

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <!-- ১. সেকশন হেডার -->
-    <div class="text-center mb-12">
+    <div class="text-center mb-4">
       <h3 class="text-h3 font-weight-bold mb-3" :style="{ color: brandColor }">
         Shop by Category
       </h3>

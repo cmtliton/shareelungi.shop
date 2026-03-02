@@ -1,5 +1,5 @@
 <template>
-  <v-container class="py-12 py-md-16">
+  <v-container class="py-8">
     <!-- 
       Added: 'flex-nowrap' for mobile to prevent wrapping and force a row.
       Added: 'flex-md-wrap' to restore the standard 4-column grid on desktop.
