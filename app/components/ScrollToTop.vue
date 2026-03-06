@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-const brandColor = "#3b2822";
+const brandColor = "#FFB300";
 const visible = ref(false);
 
 // স্ক্রল পজিশন চেক করার ফাংশন
@@ -52,13 +52,13 @@ onUnmounted(() => {
   bottom: 85px !important; /* সাধারণত নিচে চ্যাট বাটন থাকে, তাই এটি একটু উপরে রাখা হয়েছে */
   right: 25px !important;
   z-index: 99;
-  border: 2px solid #3b2822 !important; /* আপনার ব্র্যান্ড কালারের বর্ডার */
+  border: 2px solid #ffb300 !important; /* আপনার ব্র্যান্ড কালারের বর্ডার */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .scroll-btn:hover {
   transform: translateY(-8px) scale(1.1); /* প্রিমিয়াম হোভার ইফেক্ট */
-  background-color: #3b2822 !important; /* হোভার করলে ব্যাকগ্রাউন্ড ব্র্যান্ড কালার হবে */
+  background-color: #ffb300 !important; /* হোভার করলে ব্যাকগ্রাউন্ড ব্র্যান্ড কালার হবে */
 }
 
 .scroll-btn:hover .v-icon {

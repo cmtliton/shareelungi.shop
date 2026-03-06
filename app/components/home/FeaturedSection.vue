@@ -14,7 +14,7 @@
             <span
               class="text-overline font-weight-bold"
               :style="{ color: brandColor }"
-              >EXCLUSIVE EDIT</span
+              >EXCLUSIVE Collection</span
             >
           </div>
           <h2
@@ -188,7 +188,7 @@
           </v-col>
           <v-col cols="12" md="5" class="text-md-right">
             <v-btn
-              href="https://wa.link/4yd33h"
+              href="https://wa.link/e5oto8"
               target="_blank"
               size="x-large"
               color="white"

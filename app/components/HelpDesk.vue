@@ -158,12 +158,12 @@ const openWhatsApp = () => {
 
 // ২. মেসেঞ্জার ওপেন করা
 const openMessenger = () => {
-  window.open("http://m.me/emcfurnitureandengineering", "_blank");
+  window.open("http://m.me/shareelungi.shop", "_blank");
 };
 
 // ৩. সরাসরি ফোন কল
 const callNow = () => {
-  window.location.href = "tel:+8801301648832";
+  window.location.href = "tel:+8801788001641";
 };
 
 // ৪. কাস্টম চ্যাট ডায়ালগ ওপেন
@@ -176,7 +176,7 @@ const sendMessage = () => {
   if (message.value.trim()) {
     // উদাহরণস্বরূপ: হোয়াটসঅ্যাপে মেসেজটি পাঠিয়ে দেওয়া
     const encodedMsg = encodeURIComponent(message.value);
-    window.open(`https://wa.me/8801839886882?text=${encodedMsg}`, "_blank");
+    window.open(`https://wa.me/8801788001641?text=${encodedMsg}`, "_blank");
 
     message.value = "";
     chatDialog.value = false;

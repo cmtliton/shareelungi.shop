@@ -91,10 +91,10 @@
             <div class="d-flex align-center mb-4">
               <v-icon icon="mdi-phone" :color="brandColor" class="mr-3" />
               <a
-                href="tel:+8801301648832"
+                href="tel:+8801788001641"
                 class="text-body-2 text-white text-decoration-none font-weight-bold"
               >
-                +880 1301-648832
+                +880 1788-001641
               </a>
             </div>
 
@@ -102,7 +102,7 @@
               block
               color="success"
               prepend-icon="mdi-whatsapp"
-              href="https://wa.link/4yd33h"
+              href="https://wa.link/e5oto8"
               target="_blank"
               class="font-weight-bold text-white mt-2"
               rounded="lg"
@@ -170,13 +170,13 @@ const services = [
 const socialLinks = [
   {
     icon: "mdi-facebook",
-    url: "https://www.facebook.com/emcfurnitureandengineering/",
+    url: "https://www.facebook.com/profile.php?id=61585209231735",
   },
   {
     icon: "mdi-facebook-messenger",
-    url: "http://m.me/emcfurnitureandengineering",
+    url: "http://m.me/shareelungi.shop",
   },
-  { icon: "mdi-whatsapp", url: "https://wa.link/4yd33h" },
+  { icon: "mdi-whatsapp", url: "https://wa.link/e5oto8" },
   { icon: "mdi-instagram", url: "#" },
 ];
 </script>

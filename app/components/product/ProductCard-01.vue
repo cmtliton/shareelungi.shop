@@ -59,7 +59,7 @@
       <v-card-actions class="pa-4 pt-0">
         <v-btn
           block
-          color="#3b2822"
+          color="#FFB300"
           variant="flat"
           rounded="lg"
           class="font-weight-bold text-white"

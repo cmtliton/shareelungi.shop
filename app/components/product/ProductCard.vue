@@ -76,7 +76,7 @@
         <v-card-actions class="pa-4">
           <v-btn
             block
-            color="#3b2822"
+            color="#FFB300"
             variant="flat"
             prepend-icon="mdi-cart-plus"
             class="text-capitalize font-weight-bold rounded-md"

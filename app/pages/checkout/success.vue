@@ -12,8 +12,8 @@
           Thank You For Your Order!
         </h1>
         <p class="text-h6 text-grey-darken-1 mb-8">
-          Your furniture is being prepared for delivery. We have sent a
-          confirmation email to you.
+          Your order is being prepared for delivery. We have sent a confirmation
+          email to you.
         </p>
 
         <!-- ৩. অর্ডার ডিটেইলস কার্ড -->

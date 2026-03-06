@@ -34,7 +34,7 @@ const props = defineProps({
   videoUrl: {
     type: String,
     // Defaulting to a tech/tracker related video or the one from your context
-    default: "https://youtu.be/A0x_0KIXHG0",
+    default: "https://youtu.be/k9rIegmXm2k",
   },
 });
 

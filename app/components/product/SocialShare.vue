@@ -6,7 +6,7 @@
         class="text-subtitle-2 font-weight-bold mr-2"
         style="color: #3b2822"
       >
-        Share with friends:
+        Share:
       </span>
 
       <!-- সোশ্যাল বাটন লুপ -->

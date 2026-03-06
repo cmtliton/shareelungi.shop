@@ -91,12 +91,8 @@
 
       <!-- ৩. ডান পাশ: প্রোডাক্ট ইনফো -->
       <v-col cols="12" md="6" class="ps-md-10">
-        <h3 class="text-h4 mb-2">{{ product?.name }}</h3>
+        <h4 class="text-h5 mb-2">{{ product?.name }}</h4>
         <v-rating v-model="rating" density="compact" color="orange" readonly />
-        <p class="text-body-1 text-grey-darken-2 my-6">
-          <!-- eslint-disable-next-line vue/no-v-html -->
-          <span v-html="product?.short_description" />
-        </p>
         <!-- প্রাইস সেকশন -->
         <div class="d-flex align-center mb-4">
           <span
@@ -109,6 +105,10 @@
             ৳{{ product?.price }}
           </span>
         </div>
+        <p class="text-body-1 text-grey-darken-2 my-6">
+          <!-- eslint-disable-next-line vue/no-v-html -->
+          <span v-html="product?.short_description" />
+        </p>
 
         <p
           class="text-caption text-grey-darken-2 mb-6"
@@ -170,7 +170,7 @@
 
           <div class="product-actions">
             <v-btn
-              color="#3b2822"
+              color="#FFB300"
               size="large"
               prepend-icon="mdi-cart"
               class="product-action-btn product-action-btn--primary"
@@ -183,7 +183,7 @@
             </v-btn>
 
             <v-btn
-              color="#3b2822"
+              color="#FFB300"
               size="large"
               class="product-action-btn product-action-btn--secondary"
               variant="outlined"
@@ -219,8 +219,8 @@
         </section>
 
         <!-- ক্যাটাগরি ও ট্যাগ -->
-        <v-divider class="mb-4" />
-        <div class="text-caption mb-1">
+        <v-divider class="mb-2" />
+        <div class="text-caption">
           <span class="font-weight-bold">Categories:</span>
           <span v-for="(cat, i) in product.categories" :key="cat.id">
             {{ cat.name }}{{ i < product.categories.length - 1 ? ", " : "" }}
@@ -501,7 +501,7 @@ useSeoMeta({
 }
 
 .product-gallery-thumbnail-card--active {
-  border-color: #3b2822 !important;
+  border-color: #ffb300 !important;
 }
 
 .product-gallery-main {
@@ -562,13 +562,13 @@ useSeoMeta({
 }
 
 .product-action-btn--primary {
-  background: linear-gradient(90deg, #3b2822, #5b3b30);
+  background: linear-gradient(90deg, #ffb300, #d32f2f);
   color: #ffffff !important;
 }
 
 .product-action-btn--secondary {
-  border-color: #3b2822 !important;
-  color: #3b2822 !important;
+  border-color: #ffb300 !important;
+  color: #ffb300 !important;
   background-color: #ffffff !important;
 }
 
