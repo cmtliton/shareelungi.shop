@@ -158,7 +158,7 @@ const openWhatsApp = () => {
 
 // ২. মেসেঞ্জার ওপেন করা
 const openMessenger = () => {
-  window.open("http://m.me/shareelungi.shop", "_blank");
+  window.open("https://m.me/1023026194225667", "_blank");
 };
 
 // ৩. সরাসরি ফোন কল

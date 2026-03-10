@@ -170,11 +170,11 @@ const services = [
 const socialLinks = [
   {
     icon: "mdi-facebook",
-    url: "https://www.facebook.com/profile.php?id=61585209231735",
+    url: "https://www.facebook.com/profile.php?id=61585209231735#",
   },
   {
     icon: "mdi-facebook-messenger",
-    url: "http://m.me/shareelungi.shop",
+    url: "https://m.me/1023026194225667",
   },
   { icon: "mdi-whatsapp", url: "https://wa.link/e5oto8" },
   { icon: "mdi-instagram", url: "#" },
