@@ -56,7 +56,7 @@
                   <v-col cols="12" md="6" sm="12">
                     <v-text-field
                       v-model="cartStore.customer.email"
-                      label="ইমেইল (ঐচ্ছিক)"
+                      label="ইমেইল"
                       type="email"
                       variant="outlined"
                       :rules="emailRules"
@@ -203,6 +203,6 @@ const phoneRules = [
 
 // Email Validation Rules (Optional but valid format if provided)
 const emailRules = [
-  (v) => !v || /.+@.+\..+/.test(v) || "সঠিক ইমেইল ঠিকানা দিন",
+  (v) => (!!v && /.+@.+\..+/.test(v)) || "সঠিক ইমেইল ঠিকানা দিন",
 ];
 </script>

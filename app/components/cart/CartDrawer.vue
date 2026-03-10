@@ -41,7 +41,7 @@
             <v-list-item-subtitle
               class="text-body-2 text-primary font-weight-bold mb-2"
             >
-              ${{ formatPrice(item.price) }}
+              ৳{{ formatPrice(item.price) }}
             </v-list-item-subtitle>
 
             <!-- Quantity Controls -->

@@ -48,7 +48,7 @@
 // ১. ইমেজগুলো অবশ্যই public/images ফোল্ডারে থাকতে হবে
 // ২. পাথ হিসেবে './' এর বদলে সরাসরি '/' ব্যবহার করুন
 const { mobile } = useDisplay();
-const items = ["images/hero1.jpg", "images/hero2.jpg", "images/hero1.jpg"];
+const items = ["images/hero2.webp", "images/hero1.webp", "images/hero1.webp"];
 const titles = [
   "সিরাজগঞ্জের ঐতিহ্য এখন আপনার হাতের মুঠোয়!",
   "১০০% অরিজিনাল তাঁতের তৈরী লুঙ্গি ও এনায়েতপুরের শাড়ি!",

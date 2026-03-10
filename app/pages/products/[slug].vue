@@ -22,9 +22,9 @@
             Sale!
           </v-chip>
 
-          <!-- ইমেজ গ্যালারি: বাম পাশে ভার্টিক্যাল থাম্বনেইল, ডানে মেইন ইমেজ -->
+          <!-- Gallery Container -->
           <div class="product-gallery">
-            <!-- ভার্টিক্যাল থাম্বনেইল লিস্ট -->
+            <!-- Left Vertical Thumbnails -->
             <div
               v-if="product?.images?.length"
               class="product-gallery-thumbnails"
@@ -65,10 +65,16 @@
               </v-hover>
             </div>
 
-            <!-- মেইন ইমেজ -->
+            <!-- Main Image with ZOOM Effect -->
             <div class="product-gallery-main">
-              <div class="position-relative h-100">
+              <div
+                class="position-relative h-100 overflow-hidden"
+                style="cursor: crosshair"
+                @mousemove="onMouseMove"
+                @mouseleave="onMouseLeave"
+              >
                 <GlobalLoader v-show="imageLoading" />
+
                 <NuxtImg
                   v-if="product?.images?.length"
                   :src="selectedImage || product.images[0]?.src"
@@ -82,6 +88,8 @@
                   fit="contain"
                   class="bg-grey-lighten-4 w-100 h-100 transition-fade product-gallery-main-image"
                   :placeholder="[50, 50, 75, 5]"
+                  :style="zoomStyle"
+                  style="transition: transform 0.1s ease-out"
                 />
               </div>
             </div>
@@ -461,6 +469,34 @@ useSeoMeta({
     product.value?.images?.[0]?.src ||
     "https://shareelungi.shop/default-og-image.jpg",
 });
+
+const zoomStyle = ref({
+  transformOrigin: "center center",
+  transform: "scale(1)",
+});
+
+const onMouseMove = (e) => {
+  // Get the bounding rectangle of the image container
+  const { left, top, width, height } = e.target.getBoundingClientRect();
+
+  // Calculate mouse position as a percentage (0% to 100%)
+  const x = ((e.clientX - left) / width) * 100;
+  const y = ((e.clientY - top) / height) * 100;
+
+  // Apply the zoom effect
+  zoomStyle.value = {
+    transformOrigin: `${x}% ${y}%`,
+    transform: "scale(1.8)", // Adjust 1.8 for more/less zoom level
+  };
+};
+
+const onMouseLeave = () => {
+  // Reset to normal when mouse leaves
+  zoomStyle.value = {
+    transformOrigin: "center center",
+    transform: "scale(1)",
+  };
+};
 </script>
 
 <style scoped>
