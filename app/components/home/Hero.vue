@@ -48,7 +48,11 @@
 // ১. ইমেজগুলো অবশ্যই public/images ফোল্ডারে থাকতে হবে
 // ২. পাথ হিসেবে './' এর বদলে সরাসরি '/' ব্যবহার করুন
 const { mobile } = useDisplay();
-const items = ["images/hero2.webp", "images/hero1.webp", "images/hero1.webp"];
+const items = [
+  "https://api.shareelungi.shop/wp-content/uploads/2026/03/hero2.jpg",
+  "https://api.shareelungi.shop/wp-content/uploads/2026/03/hero1.jpg",
+  "https://api.shareelungi.shop/wp-content/uploads/2026/03/hero1.jpg",
+];
 const titles = [
   "সিরাজগঞ্জের ঐতিহ্য এখন আপনার হাতের মুঠোয়!",
   "১০০% অরিজিনাল তাঁতের তৈরী লুঙ্গি ও এনায়েতপুরের শাড়ি!",
@@ -102,6 +106,11 @@ useHead({
 
 .hero-container {
   position: relative;
+  background: linear-gradient(
+    135deg,
+    #ffb300 0%,
+    /* Dark Red */ #d32f2f 100% /* Your Crimson Red */
+  );
 }
 
 .hero-item {

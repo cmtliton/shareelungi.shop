@@ -3,7 +3,7 @@
   <v-container>
     <HomeHero />
     <HomeTrustFeatures />
-    <HomeCategorySection />
+    <!-- <HomeCategorySection /> -->
     <VideoShowcase />
     <HomeFeaturedSection />
 
@@ -15,7 +15,7 @@
 
     <v-row v-else>
       <v-col>
-        <h1 class="text-h4 py-6 text-yellow-darken-4">Premium Saree</h1>
+        <h1 class="text-h4 py-6 text-yellow-darken-4">Premium Saree & Lungi</h1>
         <LoadMore />
       </v-col>
     </v-row>
