@@ -24,7 +24,7 @@
         <v-col
           v-for="product in categoryProducts"
           :key="product.id"
-          cols="12"
+          cols="6"
           sm="6"
           md="4"
           lg="3"

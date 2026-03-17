@@ -79,7 +79,7 @@
           <v-col
             v-for="product in products"
             :key="product.id"
-            cols="12"
+            cols="6"
             sm="6"
             lg="4"
           >
@@ -264,6 +264,8 @@ useSeoMeta({
     "shareelungi.shop-এ সিরাজগঞ্জের এনায়েতপুরের ঐতিহ্যবাহী তাঁতের শাড়ি এবং আরামদায়ক প্রিমিয়াম সুতি লুঙ্গির বিশাল কালেকশন দেখুন।",
   twitterImage: "https://shareelungi.shop/images/Og.jpg",
 });
+
+productsStore.setProducts();
 </script>
 
 <style scoped>

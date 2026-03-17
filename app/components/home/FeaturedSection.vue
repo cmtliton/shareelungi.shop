@@ -49,7 +49,7 @@
         <v-col
           v-for="product in featuredProducts"
           :key="product.id"
-          cols="12"
+          cols="6"
           sm="6"
           md="4"
           lg="3"
@@ -81,7 +81,8 @@
                   icon
                   variant="text"
                   class="wishlist-btn"
-                  color="#3b2822"
+                  color="#ffb300"
+                  size="x-small"
                   @click.stop
                 >
                   <v-icon icon="mdi-heart-outline" />
@@ -111,9 +112,11 @@
                 <v-expand-transition>
                   <div
                     v-if="isHovering"
-                    class="featured-cart-bar d-flex align-center justify-space-between px-4"
+                    class="featured-cart-bar d-none d-md-flex align-center justify-space-between px-4"
                   >
-                    <span class="featured-cart-label">Add to cart</span>
+                    <span class="featured-cart-label font-weight-bold"
+                      >Add to cart</span
+                    >
                     <v-btn
                       icon
                       size="small"
@@ -122,31 +125,59 @@
                       class="featured-cart-icon"
                       @click.stop.prevent="addToCart(product)"
                     >
-                      <v-icon icon="mdi-cart-plus" color="#3b2822" />
+                      <v-icon icon="mdi-cart-plus" color="#ffb300" />
                     </v-btn>
                   </div>
                 </v-expand-transition>
               </div>
 
-              <!-- প্রোডাক্ট কন্টেন্ট -->
-              <v-card-text class="pa-5">
+              <!-- প্রোডাক্ট কন্টেন্ট এবং মোবাইল কার্ট বাটন -->
+              <v-card-text class="pa-3 pa-sm-5">
                 <div
-                  class="text-caption text-grey mb-1 uppercase letter-spacing-1"
+                  class="text-caption text-grey mb-1 text-uppercase"
+                  style="letter-spacing: 1px"
                 >
                   {{ product.categories[0]?.name || "Fashion" }}
                 </div>
+
                 <h3
-                  class="product-title text-truncate-2"
-                  :style="{ color: brandColor }"
+                  :class="
+                    mobile
+                      ? 'product-title-mobile'
+                      : 'product-title text-truncate-2 text-grey-darken-4 mb-2'
+                  "
                 >
                   {{ product.name }}
                 </h3>
 
-                <div class="product-price-row">
-                  <span v-if="product.on_sale" class="product-price-old">
-                    ৳{{ product.regular_price }}
-                  </span>
-                  <span class="product-price"> ৳{{ product.price }} </span>
+                <!-- Price & Mobile Cart Button Row -->
+                <div class="d-flex align-center justify-space-between mt-1">
+                  <!-- দামের অংশ -->
+                  <div class="product-price-row">
+                    <span
+                      v-if="product.on_sale"
+                      class="text-decoration-line-through text-grey mr-1 text-caption"
+                    >
+                      ৳{{ product.regular_price }}
+                    </span>
+                    <span
+                      class="font-weight-bold product-price"
+                      style="font-size: 1.1rem"
+                    >
+                      ৳{{ product.price }}
+                    </span>
+                  </div>
+
+                  <!-- Mobile Cart Button (শুধুমাত্র মোবাইলে দেখাবে) -->
+                  <v-btn
+                    icon
+                    size="small"
+                    variant="tonal"
+                    class="d-md-none product-price"
+                    @click.stop.prevent="addToCart(product)"
+                  >
+                    <v-icon icon="mdi-cart-plus" />
+                  </v-btn>
                 </div>
               </v-card-text>
             </v-card>
@@ -209,6 +240,7 @@
 const brandColor = "#FFB300";
 const productsStore = useProductsStore();
 const cartStore = useCartStore();
+const { mobile } = useDisplay();
 
 // ১. স্টোর থেকে সেরা 16টি প্রোডাক্ট নেওয়া (Featured Logic)
 const featuredProducts = computed(() => {
@@ -317,11 +349,17 @@ const addToCart = (product) => {
 .product-title {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #111827;
+  color: #ffb300;
   line-height: 1.4;
   margin-bottom: 4px;
 }
-
+.product-title-mobile {
+  font-size: 12px;
+  font-weight: 250;
+  color: #ffb300;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
 .text-truncate-2 {
   display: -webkit-box;
   line-clamp: 2;

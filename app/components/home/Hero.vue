@@ -106,11 +106,6 @@ useHead({
 
 .hero-container {
   position: relative;
-  background: linear-gradient(
-    135deg,
-    #ffb300 0%,
-    /* Dark Red */ #d32f2f 100% /* Your Crimson Red */
-  );
 }
 
 .hero-item {

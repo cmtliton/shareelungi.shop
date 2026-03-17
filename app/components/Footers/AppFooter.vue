@@ -104,7 +104,7 @@
               prepend-icon="mdi-whatsapp"
               href="https://wa.link/e5oto8"
               target="_blank"
-              class="font-weight-bold text-white mt-2"
+              class="font-weight-bold text-white mt-2 text-capitalize"
               rounded="lg"
               size="large"
             >

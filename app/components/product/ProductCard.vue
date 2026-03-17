@@ -27,7 +27,7 @@
           <!-- Wishlist Button - Absolute inside the image container -->
           <v-btn
             icon
-            size="small"
+            size="x-small"
             elevation="2"
             class="wishlist-btn"
             color="white"

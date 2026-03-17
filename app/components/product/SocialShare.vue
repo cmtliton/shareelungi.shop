@@ -1,6 +1,5 @@
 <template>
   <div>
-    <v-divider class="my-4" />
     <div class="d-flex align-center flex-wrap gap-2">
       <span
         class="text-subtitle-2 font-weight-bold mr-2"
@@ -16,11 +15,11 @@
         :icon="social.icon"
         :color="social.color"
         variant="tonal"
-        size="small"
+        size="x-small"
         class="share-btn ma-1"
         @click="openShareWindow(social.url)"
       >
-        <v-icon size="20">{{ social.icon }}</v-icon>
+        <v-icon size="16">{{ social.icon }}</v-icon>
         <v-tooltip activator="parent" location="top">
           Share on {{ social.name }}
         </v-tooltip>
@@ -30,12 +29,12 @@
       <v-btn
         icon
         variant="tonal"
-        size="small"
+        size="x-small"
         color="grey-darken-2"
         class="share-btn ma-1"
         @click="copyToClipboard"
       >
-        <v-icon size="20">mdi-link-variant</v-icon>
+        <v-icon size="16">mdi-link-variant</v-icon>
         <v-tooltip activator="parent" location="top">Copy Link</v-tooltip>
       </v-btn>
     </div>
@@ -43,7 +42,7 @@
     <!-- কপি হওয়ার নোটিফিকেশন -->
     <v-snackbar
       v-model="snackbar"
-      :timeout="2000"
+      :timeout="1000"
       color="success"
       location="bottom"
     >

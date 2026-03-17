@@ -85,7 +85,7 @@
                   format="webp"
                   width="600"
                   height="600"
-                  fit="contain"
+                  fit="cover"
                   class="bg-grey-lighten-4 w-100 h-100 transition-fade product-gallery-main-image"
                   :placeholder="[50, 50, 75, 5]"
                   :style="zoomStyle"
@@ -100,7 +100,6 @@
       <!-- ৩. ডান পাশ: প্রোডাক্ট ইনফো -->
       <v-col cols="12" md="6" class="ps-md-10">
         <h4 class="text-h5 mb-2">{{ product?.name }}</h4>
-        <v-rating v-model="rating" density="compact" color="orange" readonly />
         <!-- প্রাইস সেকশন -->
         <div class="d-flex align-center mb-4">
           <span
@@ -116,15 +115,6 @@
         <p class="text-body-1 text-grey-darken-2 my-6">
           <!-- eslint-disable-next-line vue/no-v-html -->
           <span v-html="product?.short_description" />
-        </p>
-
-        <p
-          class="text-caption text-grey-darken-2 mb-6"
-          style="line-height: 1.4"
-        >
-          <strong>Disclaimer:</strong> The actual color of the physical product
-          may slightly vary due to the deviation of lighting sources,
-          photography or your device display settings.
         </p>
 
         <!-- কালার সোয়াচেস -->
@@ -177,29 +167,34 @@
           </div>
 
           <div class="product-actions">
-            <v-btn
-              color="#FFB300"
-              size="large"
-              prepend-icon="mdi-cart"
-              class="product-action-btn product-action-btn--primary"
-              flat
-              block
-              :loading="cartStore.isAdding"
-              @click="addToCart"
-            >
-              Add to cart
-            </v-btn>
-
-            <v-btn
-              color="#FFB300"
-              size="large"
-              class="product-action-btn product-action-btn--secondary"
-              variant="outlined"
-              block
-              @click="buyNow"
-            >
-              Buy now
-            </v-btn>
+            <v-row>
+              <v-col cols="12" sm="6" md="6">
+                <v-btn
+                  color="#FFB300"
+                  size="large"
+                  prepend-icon="mdi-cart"
+                  class="product-action-btn product-action-btn--primary"
+                  flat
+                  block
+                  :loading="cartStore.isAdding"
+                  @click="addToCart"
+                >
+                  Add to cart
+                </v-btn>
+              </v-col>
+              <v-col cols="12" sm="6" md="6">
+                <v-btn
+                  color="#FFB300"
+                  size="large"
+                  class="product-action-btn product-action-btn--secondary"
+                  variant="outlined"
+                  block
+                  @click="buyNow"
+                >
+                  Buy now
+                </v-btn>
+              </v-col>
+            </v-row>
           </div>
         </div>
 
@@ -227,7 +222,7 @@
         </section>
 
         <!-- ক্যাটাগরি ও ট্যাগ -->
-        <v-divider class="mb-2" />
+        <v-divider />
         <div class="text-caption">
           <span class="font-weight-bold">Categories:</span>
           <span v-for="(cat, i) in product.categories" :key="cat.id">
@@ -246,7 +241,7 @@
     </v-row>
 
     <!-- ৪. নিচের অংশ: ডেসক্রিপশন এবং রিভিউ ট্যাব -->
-    <v-row class="mt-10">
+    <v-row class="mt-2">
       <v-col cols="12">
         <v-tabs v-model="tab" color="primary" border-b>
           <v-tab value="desc" class="text-capitalize">Description</v-tab>
@@ -257,6 +252,14 @@
           <v-window-item value="desc">
             <!-- eslint-disable-next-line vue/no-v-html -->
             <div class="product-description" v-html="sanitizedDescription" />
+            <p
+              class="text-caption text-grey-darken-2 mb-6"
+              style="line-height: 1.4"
+            >
+              <strong>Disclaimer:</strong> The actual color of the physical
+              product may slightly vary due to the deviation of lighting
+              sources, photography or your device display settings.
+            </p>
           </v-window-item>
 
           <v-window-item value="reviews">

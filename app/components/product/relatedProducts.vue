@@ -2,7 +2,7 @@
   <v-container v-if="relatedProducts.length > 0" class="py-10">
     <!-- ১. সেকশন টাইটেল -->
     <div class="d-flex align-center mb-8">
-      <h2 class="text-h4 font-weight-bold" :style="{ color: brandColor }">
+      <h2 class="text-h6 font-weight-normal" :style="{ color: brandColor }">
         Related Products
       </h2>
       <v-spacer />
@@ -22,7 +22,7 @@
       <v-col
         v-for="product in relatedProducts"
         :key="product.id"
-        cols="12"
+        cols="6"
         sm="6"
         md="4"
         lg="3"
