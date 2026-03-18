@@ -14,7 +14,7 @@ const { data: orders } = await useFetch("/api/user/orders", {
 });
 
 useSeoMeta({
-  title: "Order History | EMC Furniture & Engineering",
-  description: "View your furniture order history and track delivery status.",
+  title: "Order History | Sharee Lungi",
+  description: "View your order history and track delivery status.",
 });
 </script>

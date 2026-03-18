@@ -79,10 +79,10 @@
             color="#FFB300"
             variant="flat"
             prepend-icon="mdi-cart-plus"
-            class="text-capitalize font-weight-bold rounded-md"
+            class="text-capitalize font-weight-bold rounded-pill"
             @click="$emit('add-to-cart', product)"
           >
-            Add to Cart
+            {{ mobile ? "" : "Add to Cart" }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -93,7 +93,7 @@
 <script setup>
 import { computed } from "vue";
 import { useWishlistStore } from "../../../layers/auth/app/stores/wishlist";
-
+const { mobile } = useDisplay();
 const props = defineProps({
   product: {
     type: Object,

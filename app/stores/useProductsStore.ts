@@ -23,12 +23,16 @@ export const useProductsStore = defineStore(
      */
     const setProducts = async () => {
       try {
+        pending.value = true;
         const data = await $fetch<any[]>("/api/products", {
           query: { per_page: 100 },
         });
-        products.value = data || [];
+        const cleanData = JSON.parse(JSON.stringify(data || [])); // ডাটা ক্লিন করা হচ্ছে
+        products.value = cleanData;
       } catch (error) {
         console.error("setProducts Error:", error);
+      } finally {
+        pending.value = false;
       }
     };
 
@@ -81,7 +85,7 @@ export const useProductsStore = defineStore(
         // 2. Filter by Category
         if (filters.category) {
           result = result.filter((p) =>
-            p.categories.some((cat: any) => cat.id === filters.category)
+            p.categories.some((cat: any) => cat.id === filters.category),
           );
         }
 
@@ -135,9 +139,12 @@ export const useProductsStore = defineStore(
     };
 
     const getProductsByCategory = (categoryId: number) => {
-      return products.value.filter((product) =>
-        product.categories.some((cat: any) => cat.id == categoryId)
+      const filteredProducts = getProducts.value.filter((product) =>
+        product.categories.some(
+          (cat: { id: number }) => cat.id === Number(categoryId),
+        ),
       );
+      return JSON.parse(JSON.stringify(filteredProducts));
     };
 
     return {
@@ -153,5 +160,5 @@ export const useProductsStore = defineStore(
   },
   {
     persist: true, // পিনিয়া-পারসিস্ট-স্টেট এনাবল
-  }
+  },
 );

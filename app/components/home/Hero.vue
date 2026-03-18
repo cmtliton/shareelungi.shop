@@ -1,42 +1,44 @@
 <template>
-  <v-container class="pa-0 mb-2 overflow-hidden rounded-lg hero-container">
-    <!-- carousel height এবং NuxtImg height এক হতে হবে -->
+  <v-container
+    class="pa-0 mb-4 overflow-hidden rounded-xl hero-container shadow-sm"
+  >
     <v-carousel
-      :height="mobile ? 230 : 460"
-      :transition-duration="1500"
+      :height="mobile ? 300 : 480"
+      :transition-duration="2000"
       hide-delimiter-background
       show-arrows="hover"
       cycle
+      class="hero-carousel"
     >
       <v-carousel-item v-for="(src, i) in items" :key="i" class="hero-item">
+        <!-- NuxtImg with native Preload to fix the warning -->
         <NuxtImg
           :src="src"
           :width="mobile ? 360 : 1360"
-          :height="mobile ? 230 : 460"
+          :height="mobile ? 300 : 480"
           fit="cover"
           format="webp"
+          quality="80"
+          :preload="i === 0"
           :loading="i === 0 ? 'eager' : 'lazy'"
-          :fetchpriority="i === 0 ? 'high' : 'low'"
-          class="w-100 h-100"
-          alt="Shareelungi.shop"
+          :fetchpriority="i === 0 ? 'high' : 'auto'"
+          class="w-100 h-100 object-fit-cover"
+          alt="Shareelungi.shop Premium Collection"
         />
-        <!-- Overlay Content -->
+
+        <!-- Premium Dark Overlay -->
         <div class="hero-overlay">
           <div class="hero-content">
-            <h1 v-if="!mobile" class="hero-title">
+            <h1 class="hero-title">
               {{ titles[i] }}
             </h1>
-            <h3 v-else class="hero-title-mobile">
-              {{ titles[i] }}
-            </h3>
-            <p :class="mobile ? 'hero-subtitle-mobile' : 'hero-subtitle'">
+            <p class="hero-subtitle">
               {{ subtitles[i] }}
             </p>
-            <NuxtLink
-              to="/shop"
-              :class="mobile ? 'hero-btn-mobile' : 'hero-btn'"
-              >Shop Now</NuxtLink
-            >
+            <NuxtLink to="/shop" class="hero-btn elevation-3">
+              Shop Now
+              <v-icon icon="mdi-arrow-right" size="small" class="ml-1" />
+            </NuxtLink>
           </div>
         </div>
       </v-carousel-item>
@@ -45,14 +47,14 @@
 </template>
 
 <script setup lang="ts">
-// ১. ইমেজগুলো অবশ্যই public/images ফোল্ডারে থাকতে হবে
-// ২. পাথ হিসেবে './' এর বদলে সরাসরি '/' ব্যবহার করুন
 const { mobile } = useDisplay();
+
 const items = [
+  "https://api.shareelungi.shop/wp-content/uploads/2026/03/hero1.jpg",
   "https://api.shareelungi.shop/wp-content/uploads/2026/03/hero2.jpg",
   "https://api.shareelungi.shop/wp-content/uploads/2026/03/hero1.jpg",
-  "https://api.shareelungi.shop/wp-content/uploads/2026/03/hero1.jpg",
 ];
+
 const titles = [
   "সিরাজগঞ্জের ঐতিহ্য এখন আপনার হাতের মুঠোয়!",
   "১০০% অরিজিনাল তাঁতের তৈরী লুঙ্গি ও এনায়েতপুরের শাড়ি!",
@@ -65,53 +67,24 @@ const subtitles = [
   "প্রিয়জনকে উপহার দিতে বা নিজের ব্যবহারের জন্য সেরা মানের এনায়েতপুরের শাড়ি ও অরিজিনাল লুঙ্গি। অর্ডার করুন যত খুশি, তত।",
 ];
 
-// ৩. প্রথম ইমেজটি ব্রাউজারকে আগেভাগে জানানোর জন্য Preload করা (Best for SEO/LCP)
-useHead({
-  link: [{ rel: "preload", as: "image", href: items[0] }],
-});
+// ম্যানুয়াল useHead রিমুভ করা হয়েছে কারণ <NuxtImg :preload="true"> স্বয়ংক্রিয়ভাবে সঠিক কাজ করবে।
 </script>
 
 <style scoped>
-.cross-scale-enter-active,
-.cross-scale-leave-active {
-  transition: 0.5s cubic-bezier(0.25, 0.8, 0.5, 1);
-  transition-property: opacity, transform;
-}
-
-.cross-scale-leave-from,
-.cross-scale-leave-to {
-  position: absolute !important;
-  top: 0;
-  width: 100%;
-}
-.gradient-text {
-  background: linear-gradient(90deg, #d32f2f, #ffb300);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-}
-.cross-scale-enter-from,
-.cross-scale-leave-to {
-  opacity: 0;
-  transform: scale(0.9);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cross-scale-enter-from,
-  .cross-scale-leave-to {
-    transform: none;
-  }
-}
-
 .hero-container {
   position: relative;
+  background-color: #f9f6f0;
 }
 
 .hero-item {
   position: relative;
 }
 
+.object-fit-cover {
+  object-fit: cover;
+}
+
+/* Premium Transparent Overlay */
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -119,124 +92,112 @@ useHead({
   width: 100%;
   height: 100%;
   background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0.2) 100%
+    90deg,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.1) 100%
   );
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 60px 80px;
+  padding: 0 80px;
   z-index: 10;
 }
 
 .hero-content {
-  max-width: 600px;
-  animation: slideInLeft 0.8s ease-out;
+  max-width: 650px;
+  animation: slideInUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/* Typography Desktop */
 .hero-title {
-  font-size: 46px;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 16px;
-  line-height: 1.2;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.hero-title-mobile {
-  font-size: 16;
-  font-weight: 200;
-  color: #ffb300;
-  margin-bottom: 10px;
-  line-height: 1.2;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  font-size: 44px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 20px;
+  line-height: 1.25;
+  text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.5px;
 }
 
 .hero-subtitle {
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.95);
-  margin-bottom: 32px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 36px;
   line-height: 1.6;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-}
-.hero-subtitle-mobile {
-  font-size: 12px;
-  color: #ffb300;
-  margin-bottom: 10px;
-  line-height: 1.6;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
 }
 
+/* Primary Brand Button (#ffb300) */
 .hero-btn {
-  display: inline-block;
-  padding: 14px 36px;
-  background-color: #ff6b35;
-  color: white;
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 32px;
+  background-color: #ffb300; /* Primary Brand Color */
+  color: #212121; /* Dark text for high contrast */
   text-decoration: none;
-  border-radius: 4px;
-  font-weight: 600;
+  border-radius: 50px; /* Pill shape for modern look */
+  font-weight: 800;
   font-size: 16px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-.hero-btn-mobile {
-  display: inline-block;
-  background-color: white;
-  color: #ffb300;
-  text-decoration: none;
-  border-radius: 3px;
-  font-weight: 200;
-  font-size: 10px;
-  transition: all 0.3s ease;
-  box-shadow: 0 1px 2px rgba(255, 107, 53, 0.3);
-}
+
 .hero-btn:hover {
-  background-color: #e55a24;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(255, 107, 53, 0.4);
+  background-color: #ffc133;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 179, 0, 0.4) !important;
 }
 
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
   .hero-overlay {
-    padding: 40px;
-  }
-
-  .hero-title {
-    font-size: 32px;
-  }
-  .hero-title-mobile {
-    font-size: 24px;
-  }
-
-  .hero-subtitle {
-    font-size: 16px;
-  }
-  .hero-subtitle-mobile {
-    font-size: 12px;
+    padding: 0 24px;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.8) 100%
+    );
+    align-items: flex-end;
+    padding-bottom: 40px;
   }
 
   .hero-content {
     max-width: 100%;
+    text-align: center;
+  }
+
+  /* Fixed Mobile Typography (10px was too small) */
+  .hero-title {
+    font-size: 20px;
+    color: #ffb300; /* Brand color on mobile for attention */
+    margin-bottom: 8px;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .hero-btn {
+    padding: 12px 28px;
+    font-size: 14px;
+    width: 100%;
+    justify-content: center;
   }
 }
-.reduced-motion-info {
-  display: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .reduced-motion-info {
-    display: block;
+
+/* Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 </style>

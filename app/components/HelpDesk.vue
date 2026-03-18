@@ -112,8 +112,7 @@
 
         <v-card-text class="pa-6">
           <p class="text-body-2 text-grey-darken-1 mb-4">
-            Hello! How can we help you with our furniture or engineering
-            services today?
+            Hello! How can we help you today?
           </p>
           <v-textarea
             v-model="message"

@@ -1,5 +1,5 @@
 <script setup>
-const brandColor = "#3b2822";
+const brandColor = "#FFB300";
 const tab = ref("login");
 const errorMessage = ref("");
 const loading = ref(false);
@@ -107,7 +107,7 @@ useSeoMeta({
 });
 </script>
 <template>
-  <v-container class="fill-height bg-brown-darken-1 my-10 rounded-lg">
+  <v-container class="fill-height bg-yellow-darken-1 my-10 rounded-lg">
     <v-row no-gutters class="fill-height">
       <!-- বাম পাশ: ব্র্যান্ড ইমেজ (ডেসটপ অনলি) -->
       <v-col cols="12" md="6" class="d-none d-md-flex position-relative">
@@ -121,7 +121,7 @@ useSeoMeta({
           >
             <h1 class="text-h2 font-weight-black mb-4">Welcome Back!</h1>
             <p class="text-h6 font-weight-light opacity-80">
-              Access your orders, track your furniture delivery, and manage your
+              Access your orders, track your products delivery, and manage your
               wishlist.
             </p>
           </div>
@@ -276,7 +276,7 @@ useSeoMeta({
 
 <style scoped>
 .overlay {
-  background: rgba(59, 40, 34, 0.7);
+  background: rgba(246, 188, 29, 0.7);
   width: 100%;
   height: 100%;
   backdrop-filter: blur(4px);

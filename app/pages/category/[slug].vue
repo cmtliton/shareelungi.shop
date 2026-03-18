@@ -1,22 +1,22 @@
 <template>
   <v-container>
     <!-- ১. ব্রেডক্রাম্বস -->
-    <v-breadcrumbs :items="breadcrumbs" class="px-0 text-caption mb-4">
+    <v-breadcrumbs :items="breadcrumbs" class="px-0 text-caption mb-1">
       <template #divider>
         <v-icon icon="mdi-chevron-right" size="x-small" />
       </template>
     </v-breadcrumbs>
     <!-- ২. ক্যাটাগরি ডাটা থাকলে দেখাবে -->
     <div v-if="category">
-      <header class="mb-10">
-        <h1 class="text-h4 font-weight-bold mb-2 text-capitalize">
+      <header class="mb-1">
+        <h1 class="text-h4 font-weight-bold text-capitalize">
           {{ decodeHtml(category.name) }}
         </h1>
         <div v-if="category.description" class="text-body-1 text-grey-darken-1">
           <!-- WooCommerce ডেসক্রিপশনে HTML থাকে তাই v-html নিরাপদ -->
           <div>{{ sanitizeHtml(category.description) }}</div>
         </div>
-        <v-divider class="mt-6" />
+        <v-divider class="mt-4" />
       </header>
 
       <!-- ৩. প্রোডাক্ট গ্রিড -->
@@ -64,32 +64,62 @@
 
 <script setup>
 import { sanitizeHtml } from "~/utils/sanitizeHtml";
+
 const route = useRoute();
 const categoriesStore = useCategoriesStore();
 const productsStore = useProductsStore();
 const cartStore = useCartStore();
 
-// ১. ক্যাটাগরিকে 'computed' করতে হবে যাতে ইউআরএল চেঞ্জ হলে এটি আপডেট হয়
-const categoryFromPinia = computed(() => {
-  return categoriesStore.getCategoriesBySlug(route.params.slug);
-});
-const categoryFromServer = useCategory(route.params.slug);
-const category =
-  categoriesStore.getCategories.length > 0
-    ? categoryFromPinia
-    : categoryFromServer.category;
-// ২. প্রোডাক্ট ফিল্টারিং (category.value চেক করে নিতে হবে)
-const categoryProducts = computed(() => {
-  if (!category.value) return [];
-  return productsStore.getProductsByCategory(category.value.id);
-});
+// ১. Master Data Fetching (SSR & Client Safe)
+// useAsyncData নিশ্চিত করবে যে সার্ভার সমস্ত ডেটা লোড না হওয়া পর্যন্ত অপেক্ষা করবে
+const { data: pageData, pending } = await useAsyncData(
+  `category-page-${route.params.slug}`,
+  async () => {
+    // প্রোডাক্ট স্টোরে না থাকলে আগে প্রোডাক্ট লোড হওয়ার জন্য অপেক্ষা করুন
+    if (productsStore.getProducts.length === 0) {
+      await productsStore.setProducts();
+    }
 
-// ৩. পেন্ডিং স্টেট হ্যান্ডলিং
-const pending = computed(
-  () => categoriesStore.pending || productsStore.pending,
+    let currentCategory = null;
+
+    // ক্যাটাগরি স্টোর থেকে আনা
+    if (categoriesStore.getCategories.length > 0) {
+      currentCategory = categoriesStore.getCategoriesBySlug(route.params.slug);
+    } else {
+      // যদি পিনিয়া খালি থাকে (যেমন ডাইরেক্ট লিংক ভিজিট করলে), সার্ভার থেকে ক্যাটাগরি আনবে
+      // (আপনার useCategory কম্পোজেবলের ওপর ভিত্তি করে)
+      const { category: serverCategory } = await useCategory(route.params.slug);
+      currentCategory = serverCategory.value || serverCategory;
+    }
+
+    // প্রোডাক্ট ফিল্টারিং
+    let filteredProducts = [];
+    if (currentCategory && currentCategory.id) {
+      filteredProducts = productsStore.getProductsByCategory(
+        currentCategory.id,
+      );
+    }
+
+    // 🔥 Payload Error Fix (ম্যাজিক ট্রিক)
+    // এটি সমস্ত Proxy এবং হিডেন API ডেটা রিমুভ করে Nuxt-কে পিওর ডেটা দিবে
+    return JSON.parse(
+      JSON.stringify({
+        category: currentCategory,
+        products: filteredProducts,
+      }),
+    );
+  },
+  {
+    // ডেটা পরিবর্তন হলে অটোমেটিক আপডেট হবে
+    watch: [() => route.params.slug],
+  },
 );
 
-// ৪. ব্রেডক্রাম্বস ডাটা (category.value দিয়ে চেক করা হয়েছে)
+// ২. টেমপ্লেটে ব্যবহারের জন্য Computed ভ্যারিয়েবল (Reactively Bound)
+const category = computed(() => pageData.value?.category || null);
+const categoryProducts = computed(() => pageData.value?.products || []);
+
+// ৩. ব্রেডক্রাম্বস ডাটা (নিখুঁতভাবে category.value চেক করে)
 const breadcrumbs = computed(() => [
   { title: "Home", disabled: false, to: "/" },
   { title: "Categories", disabled: false, to: "/category" },
@@ -99,27 +129,59 @@ const breadcrumbs = computed(() => [
   },
 ]);
 
-// ৫. SEO Meta Tags
-useSeoMeta({
-  title: () =>
-    category.value ? `${category.value.name} | Sharee Lungi` : "Loading...",
-  description: () =>
-    category.value?.description?.replace(/<[^>]*>?/gm, "") || "",
-  ogTitle: () => category.value?.name || "",
-  ogDescription: () => category.value?.description?.replace(/<[^>]*>?/gm, ""),
-  ogImage: () => category.value?.image.src || "",
-  ogImageHeight: 600,
-  ogImageWidth: 600,
-});
-
-// HTML Entity ডিকোডিং ফাংশন
+// ৪. HTML Entity ডিকোডিং ফাংশন
 function decodeHtml(html) {
   if (!html) return "";
-  if (import.meta.server) return html.replace(/&amp;/g, "&"); // সার্ভার সাইড সিম্পল রিপ্লেস
+  if (import.meta.server) return html.replace(/&amp;/g, "&");
   const txt = document.createElement("textarea");
   txt.innerHTML = html;
   return txt.value;
 }
+// ৫. SEO Meta Tags
+useSeoMeta({
+  title: () =>
+    category.value
+      ? `${category.value.name} কালেকশন | shareelungi.shop`
+      : "লোড হচ্ছে... | shareelungi.shop",
+
+  description: () =>
+    category.value?.description?.replace(/<[^>]*>?/gm, "").trim() ||
+    (category.value
+      ? `shareelungi.shop-এ ${category.value.name}-এর নতুন এবং এক্সক্লুসিভ কালেকশন দেখুন। সেরা দামে অরিজিনাল দেশি পোশাক ঘরে বসেই অর্ডার করুন।`
+      : "shareelungi.shop-এ আমাদের এক্সক্লুসিভ কালেকশন দেখুন।"),
+
+  ogTitle: () =>
+    category.value
+      ? `${category.value.name} কালেকশন কিনুন | shareelungi.shop`
+      : "shareelungi.shop",
+
+  ogDescription: () =>
+    category.value?.description?.replace(/<[^>]*>?/gm, "").trim() ||
+    (category.value
+      ? `shareelungi.shop-এ ${category.value.name}-এর নতুন এবং এক্সক্লুসিভ কালেকশন দেখুন।`
+      : "shareelungi.shop-এ আমাদের এক্সক্লুসিভ কালেকশন দেখুন।"),
+
+  // Optional Chaining (?.) যুক্ত করা হয়েছে যেন ছবি না থাকলে সাইট ক্র্যাশ না করে
+  ogImage: () =>
+    category.value?.image?.src || "https://shareelungi.shop/images/hero2.jpg",
+  ogImageAlt: () => category.value?.name || "shareelungi.shop category image",
+  ogImageHeight: 600,
+  ogImageWidth: 600,
+
+  // X (Twitter) বা অন্যান্য প্ল্যাটফর্মের সোশ্যাল শেয়ারিংয়ের জন্য
+  twitterCard: "summary_large_image",
+  twitterTitle: () =>
+    category.value
+      ? `${category.value.name} কালেকশন | shareelungi.shop`
+      : "shareelungi.shop",
+  twitterDescription: () =>
+    category.value?.description?.replace(/<[^>]*>?/gm, "").trim() ||
+    (category.value
+      ? `shareelungi.shop-এ ${category.value.name}-এর নতুন কালেকশন দেখুন।`
+      : ""),
+  twitterImage: () =>
+    category.value?.image?.src || "https://shareelungi.shop/images/hero2.jpg",
+});
 </script>
 
 <style scoped>

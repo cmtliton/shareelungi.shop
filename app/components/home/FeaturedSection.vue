@@ -1,103 +1,118 @@
 <template>
-  <v-sheet class="py-16 bg-grey-lighten-5">
+  <v-sheet class="py-12 py-md-16 bg-grey-lighten-5">
     <v-container>
-      <!-- ১. সেকশন হেডার -->
-      <v-row align="center" class="mb-10">
-        <v-col cols="12" md="8">
-          <div class="d-flex align-center mb-2">
+      <!-- ১. প্রিমিয়াম সেকশন হেডার -->
+      <v-row align="end" class="mb-8 mb-md-12">
+        <v-col cols="12" md="8" class="text-center text-md-left">
+          <div class="d-flex align-center justify-center justify-md-start mb-3">
             <v-divider
-              :color="brandColor"
-              thickness="3"
-              class="mr-4 opacity-100"
-              style="width: 50px"
+              color="#D32F2F"
+              thickness="4"
+              class="mr-4 opacity-100 rounded-pill"
+              style="max-width: 40px"
             />
             <span
-              class="text-overline font-weight-bold"
-              :style="{ color: brandColor }"
-              >EXCLUSIVE Collection</span
+              class="text-button font-weight-bold"
+              style="color: #d32f2f; letter-spacing: 2px"
             >
+              EXCLUSIVE COLLECTION
+            </span>
           </div>
           <h2
-            class="text-h3 font-weight-black mb-4"
-            :style="{ color: brandColor }"
+            class="text-h4 text-md-h3 font-weight-black mb-4 text-grey-darken-4"
           >
             Featured Sarees & Lungis
           </h2>
-          <p class="text-body-1 text-grey-darken-1">
-            Handpicked sarees and lungis curated for modern, elegant wardrobes.
-            From everyday comfort to grand occasions, discover your next
-            signature drape.
+          <p
+            class="text-body-1 text-grey-darken-1 mx-auto mx-md-0"
+            style="max-width: 600px; line-height: 1.6"
+          >
+            আপনার আধুনিক ও আভিজাত্যময় লাইফস্টাইলের জন্য বাছাইকৃত সেরা শাড়ি ও
+            লুঙ্গির কালেকশন। প্রাত্যহিক ব্যবহার বা উৎসব— সবকিছুর জন্যই পারফেক্ট।
           </p>
         </v-col>
-        <v-col cols="12" md="4" class="text-md-right">
+        <v-col cols="12" md="4" class="text-center text-md-right mt-4 mt-md-0">
           <v-btn
             to="/shop"
-            variant="flat"
-            :color="brandColor"
+            variant="outlined"
+            color="#212121"
             size="large"
-            class="text-red-darken-4 font-weight-bold px-8"
-            rounded="lg"
-            elevation="2"
+            class="font-weight-bold px-8 hover-btn"
+            rounded="pill"
           >
-            VIEW ALL PRODUCTS
+            সবগুলো দেখুন
+            <v-icon icon="mdi-arrow-right" class="ml-2" size="small" />
           </v-btn>
         </v-col>
       </v-row>
 
-      <!-- ২. প্রোডাক্ট গ্রিড -->
+      <!-- ২. প্রোডাক্ট গ্রিড (Optimized for Mobile & Desktop) -->
       <v-row v-if="featuredProducts.length > 0">
         <v-col
           v-for="product in featuredProducts"
           :key="product.id"
           cols="6"
-          sm="6"
-          md="4"
-          lg="3"
+          sm="4"
+          md="3"
         >
           <v-hover v-slot="{ isHovering, props }">
             <v-card
               v-bind="props"
-              class="featured-card h-100 position-relative"
+              class="featured-card h-100 position-relative d-flex flex-column"
               flat
               border
-              rounded="xl"
+              rounded="lg"
               :to="`/products/${product.slug}`"
             >
-              <!-- সলিড ব্যাজ (Sale/New) -->
+              <!-- সলিড ব্যাজ (Sale) -->
               <v-chip
                 v-if="product.on_sale"
-                color="red"
-                size="x-small"
-                class="position-absolute ma-4 font-weight-bold"
+                color="#D32F2F"
+                size="small"
+                class="position-absolute ma-3 font-weight-bold text-white shadow-sm"
                 style="z-index: 2; top: 0; left: 0"
               >
                 SALE
               </v-chip>
 
-              <!-- ইমেজ সেকশন -->
-              <div class="featured-image-wrapper">
+              <!-- ইমেজ সেকশন (2:3 Ratio for Fashion) -->
+              <div class="featured-image-wrapper overflow-hidden">
                 <!-- Wishlist -->
                 <v-btn
                   icon
-                  variant="text"
-                  class="wishlist-btn"
-                  color="#ffb300"
+                  variant="flat"
+                  class="wishlist-btn elevation-2"
+                  color="white"
                   size="x-small"
-                  @click.stop
+                  @click.stop.prevent="addToWishlist(product)"
                 >
-                  <v-icon icon="mdi-heart-outline" />
+                  <v-icon
+                    :color="isInWishlist(product) ? 'red' : 'grey-darken-1'"
+                    :icon="
+                      isInWishlist(product) ? 'mdi-heart' : 'mdi-heart-outline'
+                    "
+                    size="16"
+                  />
+                  <v-tooltip activator="parent" location="left">
+                    {{
+                      isInWishlist(product)
+                        ? "Remove from Wishlist"
+                        : "Add to Wishlist"
+                    }}
+                  </v-tooltip>
                 </v-btn>
 
-                <!-- Base image (front view) -->
+                <!-- Base image -->
                 <NuxtImg
-                  :src="product.images[0]?.src || '/logo.png'"
+                  :src="product.images[0]?.src || '/images/placeholder.png'"
                   :alt="product.name"
                   class="featured-image featured-image--base"
                   format="webp"
                   fit="cover"
+                  loading="lazy"
                 />
 
-                <!-- Hover image (back / detail view) -->
+                <!-- Hover image -->
                 <NuxtImg
                   v-if="product.images[1]?.src"
                   :src="product.images[1]?.src"
@@ -105,24 +120,27 @@
                   class="featured-image featured-image--hover"
                   format="webp"
                   fit="cover"
+                  loading="lazy"
                   :class="{ 'featured-image--visible': isHovering }"
                 />
 
-                <!-- Hover cart bar -->
+                <!-- Desktop Hover Add to Cart -->
                 <v-expand-transition>
                   <div
                     v-if="isHovering"
-                    class="featured-cart-bar d-none d-md-flex align-center justify-space-between px-4"
+                    class="featured-cart-bar d-none d-md-flex align-center justify-space-between px-5"
+                    @click.stop.prevent="addToCart(product)"
                   >
-                    <span class="featured-cart-label font-weight-bold"
-                      >Add to cart</span
+                    <span
+                      class="featured-cart-label font-weight-bold text-grey-darken-4"
                     >
+                      Add to cart
+                    </span>
                     <v-btn
                       icon
-                      size="small"
+                      size="x-small"
                       variant="flat"
-                      color="white"
-                      class="featured-cart-icon"
+                      color="#212121"
                       @click.stop.prevent="addToCart(product)"
                     >
                       <v-icon icon="mdi-cart-plus" color="#ffb300" />
@@ -131,52 +149,48 @@
                 </v-expand-transition>
               </div>
 
-              <!-- প্রোডাক্ট কন্টেন্ট এবং মোবাইল কার্ট বাটন -->
-              <v-card-text class="pa-3 pa-sm-5">
+              <!-- প্রোডাক্ট কন্টেন্ট -->
+              <v-card-text class="pa-4 d-flex flex-column flex-grow-1">
                 <div
-                  class="text-caption text-grey mb-1 text-uppercase"
+                  class="text-caption text-grey-darken-1 mb-1 text-uppercase font-weight-medium"
                   style="letter-spacing: 1px"
                 >
                   {{ product.categories[0]?.name || "Fashion" }}
                 </div>
 
                 <h3
-                  :class="
-                    mobile
-                      ? 'product-title-mobile'
-                      : 'product-title text-truncate-2 text-grey-darken-4 mb-2'
-                  "
+                  class="product-title text-truncate-2 text-grey-darken-4 mb-auto"
                 >
                   {{ product.name }}
                 </h3>
 
                 <!-- Price & Mobile Cart Button Row -->
-                <div class="d-flex align-center justify-space-between mt-1">
-                  <!-- দামের অংশ -->
-                  <div class="product-price-row">
+                <div class="d-flex align-center justify-space-between mt-3">
+                  <div class="d-flex flex-wrap align-center gap-1">
                     <span
                       v-if="product.on_sale"
-                      class="text-decoration-line-through text-grey mr-1 text-caption"
+                      class="text-decoration-line-through text-grey text-caption mr-1"
                     >
                       ৳{{ product.regular_price }}
                     </span>
                     <span
-                      class="font-weight-bold product-price"
-                      style="font-size: 1.1rem"
+                      class="font-weight-black product-price"
+                      style="color: #d32f2f"
                     >
                       ৳{{ product.price }}
                     </span>
                   </div>
 
-                  <!-- Mobile Cart Button (শুধুমাত্র মোবাইলে দেখাবে) -->
+                  <!-- Mobile Cart Button (শুধুমাত্র মোবাইল/ট্যাবলেটে) -->
                   <v-btn
                     icon
-                    size="small"
-                    variant="tonal"
-                    class="d-md-none product-price"
+                    size="x-small"
+                    variant="flat"
+                    color="#ffb300"
+                    class="d-md-none text-grey-darken-4 elevation-1"
                     @click.stop.prevent="addToCart(product)"
                   >
-                    <v-icon icon="mdi-cart-plus" />
+                    <v-icon icon="mdi-cart-plus" size="16" />
                   </v-btn>
                 </div>
               </v-card-text>
@@ -187,47 +201,73 @@
 
       <!-- লোডিং স্টেট -->
       <v-row v-else>
-        <v-col v-for="n in 4" :key="n" cols="12" sm="6" md="3">
-          <v-skeleton-loader type="card, text, button" />
+        <v-col v-for="n in 8" :key="n" cols="6" sm="4" md="3">
+          <v-skeleton-loader type="image, article" class="rounded-2xl" />
         </v-col>
       </v-row>
     </v-container>
 
-    <!-- ৩. ইঞ্জিনিয়ারিং ফিচার হাইলাইট (Small Banner Inside) -->
-    <v-container class="mt-10">
-      <v-card color="#FFB300" theme="dark" rounded="xl" class="pa-10">
+    <!-- ৩. ট্রাস্ট ও গ্যারান্টি ব্যানার (Redesigned Premium Banner) -->
+    <v-container class="mt-12 mt-md-16">
+      <v-card class="premium-banner pa-8 pa-md-12" rounded="xl" flat>
         <v-row align="center">
-          <v-col cols="12" md="7">
-            <h2 class="text-h4 font-weight-bold mb-4 text-red-darken-4">
-              Crafted Fabrics, Honest Quality
+          <v-col cols="12" md="8" class="text-center text-md-left">
+            <h2
+              class="text-h5 text-md-h4 font-weight-black mb-4 text-grey-darken-4"
+            >
+              আসল এনায়েতপুরের শাড়ি ও সুতি লুঙ্গি!
             </h2>
-            <p class="text-body-1 opacity-80 mb-6">
-              Every saree and lungi is sourced directly from trusted weavers and
-              mills, with careful inspection before it reaches your wardrobe.
+            <p
+              class="text-body-1 mb-6 text-grey-darken-3 mx-auto mx-md-0"
+              style="max-width: 700px; line-height: 1.6"
+            >
+              আমাদের প্রতিটি শাড়ি ও লুঙ্গি সরাসরি বিশ্বস্ত তাঁতি ও ফ্যাক্টরি
+              থেকে সংগ্রহ করা হয়। গুণগত মান পরীক্ষা করেই পণ্য আপনাদের কাছে পৌঁছে
+              দেওয়া হয়।
             </p>
-            <div class="d-flex gap-4 flex-wrap">
-              <v-chip variant="tonal" prepend-icon="mdi-check"
-                >Premium Fabrics</v-chip
+            <div class="d-flex flex-wrap justify-center justify-md-start gap-3">
+              <v-chip
+                color="#212121"
+                variant="outlined"
+                prepend-icon="mdi-check-decagram"
+                class="font-weight-bold bg-white"
               >
-              <v-chip variant="tonal" prepend-icon="mdi-check"
-                >Color & Design Guarantee</v-chip
+                ১০০% খাঁটি সুতা
+              </v-chip>
+              <v-chip
+                color="#212121"
+                variant="outlined"
+                prepend-icon="mdi-palette-outline"
+                class="font-weight-bold bg-white"
               >
-              <v-chip variant="tonal" prepend-icon="mdi-check"
-                >Easy Exchange Support</v-chip
+                রঙের গ্যারান্টি
+              </v-chip>
+              <v-chip
+                color="#212121"
+                variant="outlined"
+                prepend-icon="mdi-refresh"
+                class="font-weight-bold bg-white"
               >
+                সহজ রিটার্ন পলিসি
+              </v-chip>
             </div>
           </v-col>
-          <v-col cols="12" md="5" class="text-md-right">
+          <v-col
+            cols="12"
+            md="4"
+            class="text-center text-md-right mt-6 mt-md-0"
+          >
             <v-btn
               href="https://wa.link/e5oto8"
               target="_blank"
               size="x-large"
-              color="white"
+              color="#D32F2F"
               variant="flat"
-              class="font-weight-bold text-red-darken-4 px-10"
+              class="font-weight-bold text-white px-10 banner-btn"
               rounded="pill"
             >
-              কল করুন
+              <v-icon icon="mdi-whatsapp" class="mr-2" />
+              সরাসরি কথা বলুন
             </v-btn>
           </v-col>
         </v-row>
@@ -237,14 +277,13 @@
 </template>
 
 <script setup>
-const brandColor = "#FFB300";
+import { useWishlistStore } from "../../../layers/auth/app/stores/wishlist";
 const productsStore = useProductsStore();
 const cartStore = useCartStore();
-const { mobile } = useDisplay();
+const wishlistStore = useWishlistStore();
 
-// ১. স্টোর থেকে সেরা 16টি প্রোডাক্ট নেওয়া (Featured Logic)
+// Featured Products Logic (Max 8 products for a clean 2-row grid on desktop)
 const featuredProducts = computed(() => {
-  // আপনি চাইলে এখানে specific ID বা featured: true প্রপার্টি দিয়ে ফিল্টার করতে পারেন
   return productsStore.products
     .filter((product) => product.featured === true)
     .slice(0, 16);
@@ -252,45 +291,57 @@ const featuredProducts = computed(() => {
 
 const addToCart = (product) => {
   cartStore.addToCart(product);
+  // You can also trigger a snackbar here
 };
+
+const addToWishlist = (product) => {
+  wishlistStore.toggleWishlist(product.id);
+};
+
+const isInWishlist = (product) => wishlistStore.isInWishlist(product.id);
 </script>
 
 <style scoped>
+/* Typography */
+.text-truncate-2 {
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.product-price {
+  font-size: 1.15rem;
+}
+
+/* Card Hover Effects */
 .featured-card {
-  transition: border-color 0.25s ease;
-  background-color: white !important;
-  box-shadow: none !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .featured-card:hover {
-  box-shadow: none !important;
-  border-color: rgba(59, 40, 34, 0.4) !important;
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08) !important;
+  border-color: #ffb300 !important;
 }
 
-.gap-2 {
-  gap: 8px;
-}
-.gap-4 {
-  gap: 16px;
+.featured-card:hover .product-title {
+  color: #d32f2f !important;
 }
 
-.letter-spacing-1 {
-  letter-spacing: 1px !important;
-}
-
-/* স্লাইডিং এনিমেশন */
-.v-expand-transition-enter-active,
-.v-expand-transition-leave-active {
-  transition: 0.3s ease-in-out;
-}
-
+/* Image Wrapper & Animations */
 .featured-image-wrapper {
   position: relative;
   width: 100%;
-  padding-top: 150%; /* 2:3 portrait aspect ratio */
-  overflow: hidden;
-  border-top-left-radius: 22px;
-  border-top-right-radius: 22px;
+  padding-top: 135%; /* Adjusted slightly for better overall card ratio */
   background-color: #f9f6f0;
 }
 
@@ -301,88 +352,108 @@ const addToCart = (product) => {
   height: 100%;
   object-fit: cover;
   transition:
-    opacity 0.28s ease,
-    transform 0.28s ease;
+    transform 0.8s ease,
+    opacity 0.4s ease;
+}
+
+.featured-card:hover .featured-image--base {
+  transform: scale(1.05);
 }
 
 .featured-image--base {
   opacity: 1;
 }
-
 .featured-image--hover {
   opacity: 0;
+  transform: scale(1.05);
 }
-
 .featured-image--visible {
   opacity: 1;
+  transform: scale(1);
 }
 
+/* Buttons & Elements */
 .wishlist-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 12px;
+  right: 12px;
   z-index: 3;
-  background-color: rgba(255, 255, 255, 0.8) !important;
 }
 
 .featured-cart-bar {
   position: absolute;
-  inset-inline: 12px;
-  bottom: 10px;
-  padding-block: 6px;
+  inset-inline: 16px;
+  bottom: 16px;
+  padding-block: 8px;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
-  color: #fff;
+  background-color: #ffb300; /* Brand Color Primary */
+  box-shadow: 0 4px 15px rgba(255, 179, 0, 0.4);
   z-index: 3;
 }
 
 .featured-cart-label {
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
+  font-size: 0.85rem;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.featured-cart-icon {
-  background-color: #ffffff !important;
+.hover-btn {
+  transition: all 0.3s ease;
+}
+.hover-btn:hover {
+  background-color: #212121 !important;
+  color: white !important;
 }
 
-.product-title {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #ffb300;
-  line-height: 1.4;
-  margin-bottom: 4px;
-}
-.product-title-mobile {
-  font-size: 12px;
-  font-weight: 250;
-  color: #ffb300;
-  line-height: 1.2;
-  margin-bottom: 4px;
-}
-.text-truncate-2 {
-  display: -webkit-box;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
+/* Premium Banner */
+.premium-banner {
+  background: linear-gradient(135deg, #ffc133 0%, #ffb300 100%);
+  position: relative;
   overflow: hidden;
 }
 
-.product-price-row {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  margin-top: 4px;
+.premium-banner::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  border-radius: 50%;
 }
 
-.product-price-old {
-  font-size: 0.78rem;
-  color: #9ca3af;
-  text-decoration: line-through;
+.banner-btn {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.banner-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(211, 47, 47, 0.4) !important;
 }
 
-.product-price {
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: #111827;
+/* Mobile Utilities */
+.gap-1 {
+  gap: 4px;
+}
+.gap-3 {
+  gap: 12px;
+}
+
+@media (max-width: 600px) {
+  .product-title {
+    font-size: 0.9rem; /* Perfectly readable on mobile */
+  }
+  .product-price {
+    font-size: 1.05rem;
+  }
+  .featured-image-wrapper {
+    padding-top: 145%; /* Slightly taller on mobile for Saree/Lungi */
+  }
 }
 </style>

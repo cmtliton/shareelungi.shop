@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <v-container v-if="product" class="py-2 py-md-2">
     <!-- ১. ব্রেডক্রাম্বস (Breadcrumbs) -->
@@ -112,10 +113,11 @@
             ৳{{ product?.price }}
           </span>
         </div>
-        <p class="text-body-1 text-grey-darken-2 my-6">
-          <!-- eslint-disable-next-line vue/no-v-html -->
-          <span v-html="product?.short_description" />
-        </p>
+
+        <div
+          class="text-body-1 text-grey-darken-2 my-6"
+          v-html="product?.short_description"
+        />
 
         <!-- কালার সোয়াচেস -->
         <div v-if="colorOptions.length" class="mb-6">
@@ -172,8 +174,8 @@
                 <v-btn
                   color="#FFB300"
                   size="large"
-                  prepend-icon="mdi-cart"
-                  class="product-action-btn product-action-btn--primary"
+                  prepend-icon="mdi-cart-plus"
+                  class="rounded-pill"
                   flat
                   block
                   :loading="cartStore.isAdding"

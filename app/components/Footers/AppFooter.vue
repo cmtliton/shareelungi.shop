@@ -122,7 +122,14 @@
       >
         <div class="text-caption text-grey mb-4 mb-md-0">
           © {{ new Date().getFullYear() }} <strong>Shareelungi.shop</strong>.
-          All Rights Reserved.
+          All Rights Reserved.Developed by
+          <a
+            href="https://wa.link/o3tqw1"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-white text-decoration-none"
+            >Md. Liton Miah</a
+          >.
         </div>
 
         <!-- পেমেন্ট মেথড আইকনস (Realistic Trust Building) -->

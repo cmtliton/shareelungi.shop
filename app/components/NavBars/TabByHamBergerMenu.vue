@@ -83,21 +83,25 @@
 
       <!-- আইকন সেকশন (Woodmart-style thin icons) -->
       <div class="d-flex align-right header-icons">
-        <v-btn icon variant="text" color="#FFB300">
-          <v-icon icon="mdi-magnify" />
+        <v-btn icon variant="text" color="#FFB300" class="pt-3">
+          <v-icon icon="mdi-magnify" size="28px" />
         </v-btn>
 
-        <v-btn icon variant="text" color="#FFB300" to="/login-register">
-          <v-icon icon="mdi-account-outline" />
-        </v-btn>
+        <ProfileMenu class="mx-1" />
 
-        <v-btn icon variant="text" color="#FFB300" @click="openCart">
+        <v-btn
+          icon
+          variant="text"
+          color="#FFB300"
+          class="pt-3"
+          @click="openCart"
+        >
           <v-badge
             :content="cartStore.totalItems"
             :model-value="cartStore.totalItems > 0"
             color="green"
           >
-            <v-icon icon="mdi-cart-outline" />
+            <v-icon icon="mdi-cart-outline" size="25px" />
           </v-badge>
         </v-btn>
       </div>

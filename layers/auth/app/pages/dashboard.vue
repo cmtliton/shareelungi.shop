@@ -6,7 +6,7 @@
         <v-col cols="12" md="3">
           <v-card flat rounded="xl" border class="pa-4">
             <div class="text-center py-6">
-              <v-avatar size="80" color="#3b2822" class="mb-4 elevation-4">
+              <v-avatar size="80" color="#ffb300" class="mb-4 elevation-4">
                 <v-img
                   v-if="userAvatar"
                   :src="userAvatar"
@@ -30,7 +30,7 @@
                 :prepend-icon="item.icon"
                 :title="item.title"
                 rounded="lg"
-                color="#3b2822"
+                color="#ffb300"
                 class="mb-1"
               />
               <v-divider class="my-2" />
@@ -67,7 +67,7 @@
             <v-card
               flat
               rounded="xl"
-              color="#3b2822"
+              color="#ffb300"
               class="pa-8 text-white mb-8 elevation-2"
             >
               <v-row align="center">
@@ -209,7 +209,7 @@ definePageMeta({
 // ১. সেশন এবং রাউটিং ইমপোর্ট
 const { userName, userAvatar, userEmail, clear } = useAuth(); // nuxt-auth-utils
 //const router = useRouter();
-const brandColor = "#3b2822";
+const brandColor = "#ffb300";
 
 // ২. ডাইনামিক ডেটা ফেচিং (API Call)
 // সার্ভার থেকে ইউজারের অর্ডারগুলো নিয়ে আসা হচ্ছে
@@ -217,6 +217,7 @@ const { data: orders, pending } = await useFetch("/api/user/orders", {
   key: "user-orders", // ক্যাশিং কী
   lazy: true, // পেজ লোড ফাস্ট হবে, পরে ডেটা আসবে
 });
+const { logout } = useAuth();
 
 // ৩. কম্পিউটেড প্রপার্টিজ (Computed Properties)
 const orderList = computed(() => orders.value || []); // নাল সেফটি
@@ -324,7 +325,8 @@ const loggingOut = ref(false);
 const handleLogout = async () => {
   loggingOut.value = true;
   await clear(); // সেশন ক্লিয়ার
-  await navigateTo("/login");
+  await logout();
+  await navigateTo("/");
   loggingOut.value = false;
 };
 
@@ -341,7 +343,7 @@ useSeoMeta({ title: "My Dashboard" });
 }
 .v-list-item--active {
   background-color: rgba(59, 40, 34, 0.08) !important;
-  color: #3b2822 !important;
+  color: #ffb300 !important;
   font-weight: 600;
 }
 </style>

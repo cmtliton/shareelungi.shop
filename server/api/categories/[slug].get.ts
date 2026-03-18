@@ -36,6 +36,8 @@ export default defineCachedEventHandler(
         name: data[0].name,
         slug: data[0].slug,
         description: data[0].description,
+        parent: data[0].parent,
+        menu_order: data[0].menu_order,
         image: data[0].image,
         count: data[0].count,
       };

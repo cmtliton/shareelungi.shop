@@ -4,6 +4,7 @@ export const useCategoriesStore = defineStore(
   "useCategoriesStore",
   () => {
     const categories = ref<any[]>([]);
+    const pending = ref(false);
     // ২. গেটার (Getter) - নাম অনুযায়ী সর্ট করা
     const getCategories = computed(() => {
       // original array পরিবর্তন না করে একটি কপি নিয়ে সর্ট করা নিরাপদ
@@ -17,16 +18,23 @@ export const useCategoriesStore = defineStore(
     // ৩. অ্যাকশন (Action) - এপিআই থেকে ডাটা আনা
     const setCategories = async () => {
       try {
+        pending.value = true;
         const data = await $fetch<any[]>("/api/categories");
-        categories.value = data || [];
+        const cleanData = JSON.parse(JSON.stringify(data || [])); // ডাটা ক্লিন করা হচ্ছে
+        categories.value = cleanData;
       } catch (error) {
         console.error("Failed to set categories:", error);
+      } finally {
+        pending.value = false;
       }
     };
 
     // ৪. স্লাগ দিয়ে ক্যাটাগরি খুঁজে বের করা
     const getCategoriesBySlug = (slug: string) => {
-      return getCategories.value.find((cat) => cat.slug == slug);
+      const foundCategory = getCategories.value.find(
+        (cat: any) => cat.slug === slug,
+      );
+      return foundCategory ? JSON.parse(JSON.stringify(foundCategory)) : null;
     };
 
     // ५. মেগা মেনু ক্যাটাগরি পান

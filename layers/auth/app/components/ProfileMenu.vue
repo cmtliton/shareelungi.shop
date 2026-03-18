@@ -5,7 +5,7 @@
     <v-btn
       v-if="!isAuthenticated"
       icon
-      color="white"
+      color="#FFB300"
       variant="text"
       @click="handleLogin"
     >
@@ -21,7 +21,7 @@
     >
       <template #activator="{ props }">
         <v-btn icon v-bind="props" class="profile-avatar-btn">
-          <v-avatar color="#3b2822" size="40" class="elevation-2">
+          <v-avatar color="#3b2822" size="35" class="elevation-2">
             <v-img
               :alt="userName"
               :src="userAvatar"

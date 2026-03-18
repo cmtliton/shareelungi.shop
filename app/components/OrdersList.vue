@@ -12,9 +12,7 @@
         <h1 class="text-h4 font-weight-bold" :style="{ color: brandColor }">
           My Orders
         </h1>
-        <p class="text-subtitle-2 text-grey">
-          Track and manage your furniture purchases
-        </p>
+        <p class="text-subtitle-2 text-grey">Track and manage your purchases</p>
       </div>
     </div>
 
@@ -178,7 +176,7 @@
       />
       <h3 class="text-h5 text-grey-darken-1">No orders found</h3>
       <p class="text-body-2 text-grey mb-6">
-        You haven't placed any furniture orders yet.
+        You haven't placed any orders yet.
       </p>
       <v-btn
         :color="brandColor"
@@ -194,7 +192,7 @@
 </template>
 
 <script setup>
-const brandColor = "#3b2822";
+const brandColor = "#ffb300";
 // আপনার ডাটা ফেচ করার লজিক এখানে (Props বা API Call)
 // উদাহরণ হিসেবে আপনার দেওয়া JSON ডাটা এখানে orders হিসেবে কল্পনা করা হয়েছে।
 defineProps({
@@ -238,7 +236,7 @@ const getStatusColor = (status) => {
 
 <style scoped>
 .custom-panels :deep(.v-expansion-panel-title--active) {
-  background-color: #3b2822 !important;
+  background-color: #ffb300 !important;
   color: white !important;
 }
 

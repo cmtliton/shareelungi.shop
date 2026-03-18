@@ -77,7 +77,7 @@
           <v-card-actions class="pa-4">
             <v-btn
               variant="flat"
-              color="#3b2822"
+              color="#ffb300"
               class="text-capitalize rounded-lg px-6"
               prepend-icon="mdi-pencil"
               @click="openEditDialog('billing')"
@@ -139,7 +139,7 @@
           <v-card-actions class="pa-4">
             <v-btn
               variant="flat"
-              color="#3b2822"
+              color="#ffb300"
               class="text-capitalize rounded-lg px-6"
               prepend-icon="mdi-pencil"
               @click="openEditDialog('shipping')"
@@ -167,7 +167,7 @@
                   label="First Name"
                   variant="outlined"
                   density="compact"
-                  color="#3b2822"
+                  color="#ffb300"
                 />
               </v-col>
               <v-col cols="12" md="6">
@@ -176,7 +176,7 @@
                   label="Last Name"
                   variant="outlined"
                   density="compact"
-                  color="#3b2822"
+                  color="#ffb300"
                 />
               </v-col>
               <v-col cols="12">
@@ -185,7 +185,7 @@
                   label="Company Name (Optional)"
                   variant="outlined"
                   density="compact"
-                  color="#3b2822"
+                  color="#ffb300"
                 />
               </v-col>
               <v-col cols="12">
@@ -194,7 +194,7 @@
                   label="Street Address"
                   variant="outlined"
                   density="compact"
-                  color="#3b2822"
+                  color="#ffb300"
                 />
               </v-col>
               <v-col cols="12">
@@ -203,7 +203,7 @@
                   label="Apartment, unit, etc. (Optional)"
                   variant="outlined"
                   density="compact"
-                  color="#3b2822"
+                  color="#ffb300"
                 />
               </v-col>
               <v-col cols="12" md="6">
@@ -212,7 +212,7 @@
                   label="Town / City"
                   variant="outlined"
                   density="compact"
-                  color="#3b2822"
+                  color="#ffb300"
                 />
               </v-col>
               <v-col cols="12" md="6">
@@ -221,7 +221,7 @@
                   label="Postcode / ZIP"
                   variant="outlined"
                   density="compact"
-                  color="#3b2822"
+                  color="#ffb300"
                 />
               </v-col>
               <v-col cols="12" md="6">
@@ -230,7 +230,7 @@
                   label="State / County"
                   variant="outlined"
                   density="compact"
-                  color="#3b2822"
+                  color="#ffb300"
                 />
               </v-col>
               <v-col cols="12" md="6">
@@ -239,7 +239,7 @@
                   label="Country"
                   variant="outlined"
                   density="compact"
-                  color="#3b2822"
+                  color="#ffb300"
                 />
               </v-col>
 
@@ -251,7 +251,7 @@
                     label="Phone"
                     variant="outlined"
                     density="compact"
-                    color="#3b2822"
+                    color="#ffb300"
                   />
                 </v-col>
                 <v-col cols="12" md="6">
@@ -260,7 +260,7 @@
                     label="Email Address"
                     variant="outlined"
                     density="compact"
-                    color="#3b2822"
+                    color="#ffb300"
                   />
                 </v-col>
               </template>
@@ -274,7 +274,7 @@
           <v-spacer />
           <v-btn variant="text" @click="dialog = false">Cancel</v-btn>
           <v-btn
-            color="#3b2822"
+            color="#ffb300"
             variant="flat"
             :loading="saving"
             class="px-6"
@@ -377,7 +377,7 @@ const saveAddress = async () => {
   }
 };
 
-useSeoMeta({ title: "Addresses | EMC Furniture" });
+useSeoMeta({ title: "Addresses | Sharee Lungi" });
 </script>
 
 <style scoped>

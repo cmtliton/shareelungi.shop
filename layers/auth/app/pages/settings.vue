@@ -40,7 +40,7 @@
                     label="First Name"
                     variant="outlined"
                     density="comfortable"
-                    color="#3b2822"
+                    color="#ffb300"
                     :rules="[rules.required]"
                   />
                 </v-col>
@@ -51,7 +51,7 @@
                     label="Last Name"
                     variant="outlined"
                     density="comfortable"
-                    color="#3b2822"
+                    color="#ffb300"
                     :rules="[rules.required]"
                   />
                 </v-col>
@@ -64,7 +64,7 @@
                     persistent-hint
                     variant="outlined"
                     density="comfortable"
-                    color="#3b2822"
+                    color="#ffb300"
                     :rules="[rules.required]"
                   />
                 </v-col>
@@ -76,7 +76,7 @@
                     type="email"
                     variant="outlined"
                     density="comfortable"
-                    color="#3b2822"
+                    color="#ffb300"
                     :rules="[rules.required, rules.email]"
                   />
                 </v-col>
@@ -84,7 +84,7 @@
 
               <div class="d-flex justify-end mt-4">
                 <v-btn
-                  color="#3b2822"
+                  color="#ffb300"
                   size="large"
                   variant="flat"
                   class="text-capitalize rounded-lg px-6"
@@ -136,7 +136,7 @@
                     :append-inner-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
                     variant="outlined"
                     density="comfortable"
-                    color="#3b2822"
+                    color="#ffb300"
                     @click:append-inner="showPass = !showPass"
                   />
                 </v-col>
@@ -148,7 +148,7 @@
                     :type="showPass ? 'text' : 'password'"
                     variant="outlined"
                     density="comfortable"
-                    color="#3b2822"
+                    color="#ffb300"
                     :rules="[rules.matchPassword]"
                   />
                 </v-col>
@@ -156,7 +156,7 @@
 
               <div class="d-flex justify-end mt-4">
                 <v-btn
-                  color="#3b2822"
+                  color="#ffb300"
                   size="large"
                   variant="outlined"
                   class="text-capitalize rounded-lg px-6"
@@ -285,5 +285,5 @@ const updatePassword = async () => {
   }
 };
 
-useSeoMeta({ title: "Account Settings | EMC Furniture" });
+useSeoMeta({ title: "Account Settings | Saree Lungi-শাড়ি লুঙ্গী" });
 </script>

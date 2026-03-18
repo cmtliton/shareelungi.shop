@@ -70,7 +70,7 @@ const orderId = computed(() => route.query.order_id);
 
 // এসইও (SEO) মেটা সেট করা
 useSeoMeta({
-  title: "Order Successful | Luxury Furniture Store",
+  title: "Order Successful | Saree Lungi-শাড়ি লুঙ্গী",
   description:
     "Thank you for your purchase. Your order has been placed successfully.",
   robots: "noindex, nofollow", // চেকআউট সাকসেস পেজ গুগলে ইনডেক্স করা উচিত নয়

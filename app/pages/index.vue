@@ -25,12 +25,10 @@
 <script setup>
 import LoadMore from "~/components/product/loadMore.vue";
 
-//const { fetchProducts } = useProducts();
-
 const pending = ref(false);
 
-//const { data: pending } = await fetchProducts({ per_page: 100 });
-
+const productsStore = useProductsStore();
+productsStore.setProducts();
 // SEO Meta
 useSeoMeta({
   title:

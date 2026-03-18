@@ -9,7 +9,7 @@ export const useWishlistStore = defineStore(
     // অ্যাপ লোড হওয়ার সময় লোকাল স্টোরেজ থেকে ডাটা আনা
     const initWishlist = () => {
       if (import.meta.client) {
-        const stored = localStorage.getItem("emc-wishlist");
+        const stored = localStorage.getItem("shareelungi-wishlist");
         if (stored) items.value = JSON.parse(stored);
       }
     };
@@ -37,7 +37,10 @@ export const useWishlistStore = defineStore(
 
     const syncStorage = () => {
       if (import.meta.client) {
-        localStorage.setItem("emc-wishlist", JSON.stringify(items.value));
+        localStorage.setItem(
+          "shareelungi-wishlist",
+          JSON.stringify(items.value),
+        );
       }
     };
 

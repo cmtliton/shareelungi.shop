@@ -9,7 +9,7 @@
           class="mr-4"
         />My Wishlist
       </h2>
-      <v-chip class="ml-4" color="#3b2822" variant="tonal" size="small">
+      <v-chip class="ml-4" color="#ffb300" variant="tonal" size="small">
         {{ wishlistStore.items.length }} Items
       </v-chip>
     </div>
@@ -33,10 +33,10 @@
         Your wishlist is empty
       </h3>
       <p class="text-grey mb-6">
-        Seems like you haven't found your favorite furniture yet.
+        Seems like you haven't found your favorite product yet.
       </p>
       <v-btn
-        color="#3b2822"
+        color="#ffb300"
         size="large"
         rounded="xl"
         to="/shop"
@@ -125,7 +125,7 @@
           <v-card-actions class="pa-4">
             <v-btn
               block
-              color="#3b2822"
+              color="#ffb300"
               variant="flat"
               rounded="lg"
               prepend-icon="mdi-cart-plus"
@@ -203,7 +203,7 @@ const ProductRedirect = (id) => {
   navigateTo(`/products/${id}`);
 };
 
-useSeoMeta({ title: "My Wishlist | EMC Furniture" });
+useSeoMeta({ title: "My Wishlist | Sharee Lungi-শাড়ি লুঙ্গী" });
 </script>
 
 <style scoped>
